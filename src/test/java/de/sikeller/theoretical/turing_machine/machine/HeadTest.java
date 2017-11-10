@@ -1,14 +1,14 @@
 package de.sikeller.theoretical.turing_machine.machine;
 
 import de.sikeller.theoretical.turing_machine.machine.head.Head;
-import de.sikeller.theoretical.turing_machine.tape.ISquare;
-import de.sikeller.theoretical.turing_machine.tape.InfiniteTape;
-import de.sikeller.theoretical.turing_machine.tape.SymbolSquare;
+import de.sikeller.theoretical.turing_machine.tape.*;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class HeadTest {
 
@@ -69,6 +69,18 @@ public class HeadTest {
         assertEquals("b", new Head(1, "f", tape).read());
         assertEquals("c", new Head(2, "f", tape).read());
         assertEquals("f", new Head(3, "f", tape).read());
+    }
+
+    @Test
+    public void write() throws Exception {
+        ITape tape = mock(ITape.class);
+        Head head = new Head(1, "f", tape);
+
+        head.write("a");
+        verify(tape).write(1, new SymbolSquare("a"));
+
+        head.write("f");
+        verify(tape).write(1, new BlankSquare());
     }
 
     @Test

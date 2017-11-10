@@ -10,6 +10,8 @@ public interface IHead {
 
     String read();
 
+    void write(String symbol);
+
     void useTape(ITape tape);
 
 }

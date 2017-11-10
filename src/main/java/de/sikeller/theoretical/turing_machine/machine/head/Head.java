@@ -1,14 +1,16 @@
 package de.sikeller.theoretical.turing_machine.machine.head;
 
+import de.sikeller.theoretical.turing_machine.tape.BlankSquare;
 import de.sikeller.theoretical.turing_machine.tape.ISquare;
 import de.sikeller.theoretical.turing_machine.tape.ITape;
+import de.sikeller.theoretical.turing_machine.tape.SymbolSquare;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Head implements IHead {
 
     private int pointer;
-    private String blankSymbol;
+    private final String blankSymbol;
     private ITape tape;
 
     public Head(String blankSymbol, ITape tape) {
@@ -32,6 +34,12 @@ public class Head implements IHead {
             return blankSymbol;
         }
         return square.getSymbol();
+    }
+
+    @Override
+    public void write(String symbol) {
+        ISquare square = blankSymbol.equals(symbol) ? new BlankSquare() : new SymbolSquare(symbol);
+        tape.write(pointer, square);
     }
 
     @Override
