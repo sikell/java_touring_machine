@@ -1,4 +1,4 @@
-package de.sikeller.theoretical.turing_machine.machine;
+package de.sikeller.theoretical.turing_machine.machine.head;
 
 import de.sikeller.theoretical.turing_machine.tape.ITape;
 

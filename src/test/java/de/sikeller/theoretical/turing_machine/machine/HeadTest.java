@@ -1,5 +1,6 @@
 package de.sikeller.theoretical.turing_machine.machine;
 
+import de.sikeller.theoretical.turing_machine.machine.head.Head;
 import de.sikeller.theoretical.turing_machine.tape.ISquare;
 import de.sikeller.theoretical.turing_machine.tape.InfiniteTape;
 import de.sikeller.theoretical.turing_machine.tape.SymbolSquare;
