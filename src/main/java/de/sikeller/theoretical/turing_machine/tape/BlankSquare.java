@@ -15,4 +15,9 @@ public class BlankSquare implements ISquare {
         return null;
     }
 
+    @Override
+    public String toSymbolString() {
+        return "~";
+    }
+
 }

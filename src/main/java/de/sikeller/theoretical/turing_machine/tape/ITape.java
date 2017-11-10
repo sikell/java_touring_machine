@@ -6,4 +6,6 @@ public interface ITape {
 
     void write(Integer index, ISquare symbol);
 
+    String toSymbolString();
+
 }

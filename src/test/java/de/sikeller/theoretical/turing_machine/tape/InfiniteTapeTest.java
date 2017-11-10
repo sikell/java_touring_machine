@@ -3,25 +3,17 @@ package de.sikeller.theoretical.turing_machine.tape;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
 public class InfiniteTapeTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void constructorEmptyTest() throws Exception {
-        new InfiniteTape(null);
-    }
 
     @Test
     public void read() throws Exception {
-        ISquare[] tapeVal = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c"),
-                new SymbolSquare("d")
-        };
-        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        InfiniteTape tape = new InfiniteTape("abcd");
         assertEquals(new BlankSquare(), tape.read(-2));
         assertEquals(new BlankSquare(), tape.read(-1));
         assertEquals(new SymbolSquare("a"), tape.read(0));
@@ -58,37 +50,59 @@ public class InfiniteTapeTest {
 
     @Test
     public void equals() throws Exception {
-        ISquare[] tapeVal1 = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c")
-        };
-        InfiniteTape tape1 = new InfiniteTape(Arrays.asList(tapeVal1));
-
-        ISquare[] tapeVal2 = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b")
-        };
-        InfiniteTape tape2 = new InfiniteTape(Arrays.asList(tapeVal2));
-
-        ISquare[] tapeVal3 = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c")
-        };
-        InfiniteTape tape3 = new InfiniteTape(Arrays.asList(tapeVal3));
-
-        ISquare[] tapeVal4 = {
-                new SymbolSquare("a"),
-                new SymbolSquare("d"),
-                new SymbolSquare("c")
-        };
-        InfiniteTape tape4 = new InfiniteTape(Arrays.asList(tapeVal4));
+        InfiniteTape tape1 = new InfiniteTape("abc");
+        InfiniteTape tape2 = new InfiniteTape("ab");
+        InfiniteTape tape3 = new InfiniteTape("abc");
+        InfiniteTape tape4 = new InfiniteTape("adc");
 
         assertFalse(tape1.equals(tape2));
         assertTrue(tape1.equals(tape3));
         assertFalse(tape1.equals(tape4));
+    }
 
+
+    @Test
+    public void constructorFromString() throws Exception {
+        ITape tape = new InfiniteTape("abc");
+        ISquare[] tapeVal = {
+                new SymbolSquare("a"),
+                new SymbolSquare("b"),
+                new SymbolSquare("c")
+        };
+        ITape expected = new InfiniteTape(Arrays.asList(tapeVal));
+        assertEquals(expected, tape);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructorNullTest() throws Exception {
+        new InfiniteTape((Collection<ISquare>) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructorEmptyTest() throws Exception {
+        new InfiniteTape(new LinkedList<>());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void constructorNullStringTest() throws Exception {
+        new InfiniteTape((String) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructorEmptyStringTest() throws Exception {
+        System.out.println(new InfiniteTape("").toSymbolString());
+    }
+
+    @Test
+    public void toSymbolString() throws Exception {
+        ISquare[] tapeVal = {
+                new SymbolSquare("a"),
+                new BlankSquare(),
+                new SymbolSquare("c")
+        };
+        assertEquals("abc", new InfiniteTape("abc").toSymbolString());
+        assertEquals("ac", new InfiniteTape("ac").toSymbolString());
+        assertEquals("a~c", new InfiniteTape(Arrays.asList(tapeVal)).toSymbolString());
     }
 
 }

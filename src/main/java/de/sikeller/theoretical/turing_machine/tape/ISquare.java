@@ -6,4 +6,6 @@ public interface ISquare {
 
     String getSymbol();
 
+    String toSymbolString();
+
 }

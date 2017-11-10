@@ -3,21 +3,27 @@ package de.sikeller.theoretical.turing_machine.tape;
 import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @EqualsAndHashCode
 public class InfiniteTape implements ITape {
 
     private final ArrayList<ISquare> array;
-    private int offset;
 
-    public InfiniteTape(Collection<ISquare> array) {
+    InfiniteTape(String sequence) {
+        this(Arrays.stream(sequence.split(""))
+                .map(SymbolSquare::new)
+                .collect(Collectors.toList()));
+    }
+
+    InfiniteTape(Collection<ISquare> array) {
         this.array = new ArrayList<>();
-        if (array == null) {
+        if (array == null || array.isEmpty()) {
             throw new IllegalArgumentException("InfiniteTape must not be empty!");
         }
         this.array.addAll(array);
-        this.offset = 0;
     }
 
     @Override
@@ -35,4 +41,13 @@ public class InfiniteTape implements ITape {
         }
         array.set(index, symbol);
     }
+
+    @Override
+    public String toSymbolString() {
+        return array.stream()
+                .map(ISquare::toSymbolString)
+                .reduce(String::concat)
+                .orElse(null);
+    }
+
 }
