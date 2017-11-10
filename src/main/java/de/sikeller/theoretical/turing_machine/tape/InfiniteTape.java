@@ -4,12 +4,12 @@ import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @EqualsAndHashCode
 public class InfiniteTape implements ITape {
 
-    private final List<ISquare> array;
+    private final ArrayList<ISquare> array;
+    private int offset;
 
     public InfiniteTape(Collection<ISquare> array) {
         this.array = new ArrayList<>();
@@ -17,6 +17,7 @@ public class InfiniteTape implements ITape {
             throw new IllegalArgumentException("InfiniteTape must not be empty!");
         }
         this.array.addAll(array);
+        this.offset = 0;
     }
 
     @Override
@@ -25,5 +26,13 @@ public class InfiniteTape implements ITape {
             return new BlankSquare();
         }
         return array.get(index);
+    }
+
+    @Override
+    public void write(Integer index, ISquare symbol) {
+        if (index < 0 || index >= array.size()) {
+            throw new IllegalArgumentException("Write on blanks, which are not initialized on startup is actually not possible.");
+        }
+        array.set(index, symbol);
     }
 }

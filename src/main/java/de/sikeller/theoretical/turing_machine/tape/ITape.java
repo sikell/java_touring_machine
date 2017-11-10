@@ -4,4 +4,6 @@ public interface ITape {
 
     ISquare read(Integer index);
 
+    void write(Integer index, ISquare symbol);
+
 }

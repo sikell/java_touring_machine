@@ -14,7 +14,7 @@ public class InfiniteTapeTest {
     }
 
     @Test
-    public void moveRight() throws Exception {
+    public void read() throws Exception {
         ISquare[] tapeVal = {
                 new SymbolSquare("a"),
                 new SymbolSquare("b"),
@@ -30,6 +30,30 @@ public class InfiniteTapeTest {
         assertEquals(new SymbolSquare("d"), tape.read(3));
         assertEquals(new BlankSquare(), tape.read(4));
         assertEquals(new BlankSquare(), tape.read(5));
+    }
+
+    @Test
+    public void write() throws Exception {
+        ISquare[] tapeVal = {new SymbolSquare("a")};
+        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        tape.write(0, new BlankSquare());
+
+        assertEquals(new BlankSquare(), tape.read(0));
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void writeOnBlanksRight() throws Exception {
+        ISquare[] tapeVal = {new SymbolSquare("a")};
+        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        tape.write(1, new BlankSquare());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void writeOnBlanksLeft() throws Exception {
+        ISquare[] tapeVal = {new SymbolSquare("a")};
+        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        tape.write(-1, new BlankSquare());
     }
 
     @Test
