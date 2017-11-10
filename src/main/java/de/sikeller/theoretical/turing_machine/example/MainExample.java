@@ -1,4 +1,4 @@
-package de.sikeller.theoretical.turing_machine;
+package de.sikeller.theoretical.turing_machine.example;
 
 public class MainExample {
 
