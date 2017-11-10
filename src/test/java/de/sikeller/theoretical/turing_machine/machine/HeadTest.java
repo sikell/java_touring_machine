@@ -1,26 +1,27 @@
 package de.sikeller.theoretical.turing_machine.machine;
 
 import de.sikeller.theoretical.turing_machine.machine.head.Head;
-import de.sikeller.theoretical.turing_machine.tape.*;
+import de.sikeller.theoretical.turing_machine.tape.BlankSquare;
+import de.sikeller.theoretical.turing_machine.tape.ITape;
+import de.sikeller.theoretical.turing_machine.tape.SymbolSquare;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class HeadTest {
 
     @Test
     public void moveRight() throws Exception {
-        ISquare[] tapeVal = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c"),
-                new SymbolSquare("d")
-        };
-        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        ITape tape = mock(ITape.class);
+        when(tape.read(-1)).thenReturn(new BlankSquare());
+        when(tape.read(0)).thenReturn(new SymbolSquare("a"));
+        when(tape.read(1)).thenReturn(new SymbolSquare("b"));
+        when(tape.read(2)).thenReturn(new SymbolSquare("c"));
+        when(tape.read(3)).thenReturn(new SymbolSquare("d"));
+        when(tape.read(4)).thenReturn(new BlankSquare());
+        when(tape.read(5)).thenReturn(new BlankSquare());
+
         Head head = new Head(0, "h", tape);
         assertEquals("a", head.read());
         head.moveRight();
@@ -37,12 +38,13 @@ public class HeadTest {
 
     @Test
     public void moveLeft() throws Exception {
-        ISquare[] tapeVal = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c")
-        };
-        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        ITape tape = mock(ITape.class);
+        when(tape.read(-2)).thenReturn(new BlankSquare());
+        when(tape.read(-1)).thenReturn(new BlankSquare());
+        when(tape.read(0)).thenReturn(new SymbolSquare("a"));
+        when(tape.read(1)).thenReturn(new SymbolSquare("b"));
+        when(tape.read(2)).thenReturn(new SymbolSquare("c"));
+
         Head head = new Head(2, "h", tape);
         assertEquals("c", head.read());
         head.moveLeft();
@@ -57,12 +59,12 @@ public class HeadTest {
 
     @Test
     public void read() throws Exception {
-        ISquare[] tapeVal = {
-                new SymbolSquare("a"),
-                new SymbolSquare("b"),
-                new SymbolSquare("c")
-        };
-        InfiniteTape tape = new InfiniteTape(Arrays.asList(tapeVal));
+        ITape tape = mock(ITape.class);
+        when(tape.read(-1)).thenReturn(new BlankSquare());
+        when(tape.read(0)).thenReturn(new SymbolSquare("a"));
+        when(tape.read(1)).thenReturn(new SymbolSquare("b"));
+        when(tape.read(2)).thenReturn(new SymbolSquare("c"));
+        when(tape.read(3)).thenReturn(new BlankSquare());
 
         assertEquals("f", new Head(-1, "f", tape).read());
         assertEquals("a", new Head(0, "f", tape).read());
@@ -85,15 +87,25 @@ public class HeadTest {
 
     @Test
     public void useTape() throws Exception {
-        ISquare[] tapeVal = {new SymbolSquare("a")};
-        Head head = new Head("h", new InfiniteTape(Arrays.asList(tapeVal)));
+        ITape oldTape = mock(ITape.class);
+        when(oldTape.read(0)).thenReturn(new BlankSquare());
+        ITape newTape = mock(ITape.class);
+        when(newTape.read(0)).thenReturn(new BlankSquare());
 
-        assertEquals("a", head.read());
+        Head head = new Head("h", oldTape);
+        head.read();
+        head.write("a");
 
-        ISquare[] newTapeVal = {new SymbolSquare("d")};
-        head.useTape(new InfiniteTape(Arrays.asList(newTapeVal)));
+        verify(oldTape).read(0);
+        verify(oldTape).write(0, new SymbolSquare("a"));
 
-        assertEquals("d", head.read());
+        head.useTape(newTape);
+        head.read();
+        head.write("a");
+
+        verify(newTape).read(0);
+        verify(newTape).write(0, new SymbolSquare("a"));
+        verifyZeroInteractions(oldTape);
     }
 
 }
