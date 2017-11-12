@@ -12,7 +12,7 @@ public class InfiniteTape implements ITape {
 
     private final ArrayList<ISquare> array;
 
-    InfiniteTape(String sequence) {
+    public InfiniteTape(String sequence) {
         this(Arrays.stream(sequence.split(""))
                 .map(SymbolSquare::new)
                 .collect(Collectors.toList()));
