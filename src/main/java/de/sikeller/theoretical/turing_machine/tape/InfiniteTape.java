@@ -36,10 +36,20 @@ public class InfiniteTape implements ITape {
 
     @Override
     public void write(Integer index, ISquare symbol) {
-        if (index < 0 || index >= array.size()) {
-            throw new IllegalArgumentException("Write on blanks, which are not initialized on startup is actually not possible.");
+        if (index < 0) {
+            throw new IllegalArgumentException("Write on blanks, which has an index smaller 0 and are not initialized " +
+                    "on startup is actually not possible.");
         }
-        array.set(index, symbol);
+        if (index >= array.size()) {
+            System.out.print("Index to write greater than tape size: Fill up with blanks!");
+            int diff = array.size() - index;
+            for (int i = 0; i < diff; i++) {
+                array.add(new BlankSquare());
+            }
+            array.add(symbol);
+        } else {
+            array.set(index, symbol);
+        }
     }
 
     @Override

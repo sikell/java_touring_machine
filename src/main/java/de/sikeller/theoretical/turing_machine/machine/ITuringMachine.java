@@ -1,7 +1,9 @@
 package de.sikeller.theoretical.turing_machine.machine;
 
+import de.sikeller.theoretical.turing_machine.tape.ITape;
+
 public interface ITuringMachine {
 
-    void solve();
+    boolean solve(ITape tape);
 
 }

@@ -1,7 +1,7 @@
 package de.sikeller.theoretical.turing_machine.machine.transition;
 
 import de.sikeller.theoretical.turing_machine.machine.head.HeadMotion;
-import de.sikeller.theoretical.turing_machine.machine.state.State;
+import de.sikeller.theoretical.turing_machine.machine.state.IState;
 
 public interface ITransition {
 
@@ -9,6 +9,6 @@ public interface ITransition {
 
     String getWrite();
 
-    State getNextState();
+    IState getNextState();
 
 }

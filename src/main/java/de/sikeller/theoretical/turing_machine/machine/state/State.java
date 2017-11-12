@@ -9,6 +9,10 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class State implements IState {
 
-    private String name;
+    private final String name;
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
