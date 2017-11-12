@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class TransitionFunction implements ITransitionFunction {
 
-    private Map<IState, Map<String, ITransitionRule>> rules = new HashMap<>();
+    private final Map<IState, Map<String, ITransitionRule>> rules = new HashMap<>();
 
     public TransitionFunction(Set<ITransitionRule> rules) {
         rules.forEach(this::addRule);
@@ -16,7 +16,7 @@ public class TransitionFunction implements ITransitionFunction {
 
     @Override
     public ITransition getTransition(IState state, String symbol) {
-        return rules.get(state).get(symbol);
+        return rules.get(state) == null ? null : rules.get(state).get(symbol);
     }
 
 
