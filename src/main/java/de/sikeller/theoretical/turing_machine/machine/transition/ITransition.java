@@ -3,11 +3,11 @@ package de.sikeller.theoretical.turing_machine.machine.transition;
 import de.sikeller.theoretical.turing_machine.machine.head.HeadMotion;
 import de.sikeller.theoretical.turing_machine.machine.state.IState;
 
-public interface ITransition {
+public interface ITransition<A> {
 
     HeadMotion getHeadMotion();
 
-    String getWrite();
+    A getWrite();
 
     IState getNextState();
 

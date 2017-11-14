@@ -13,6 +13,7 @@ public enum HeadMotion {
                 head.moveRight();
                 break;
             case NONE:
+            default:
         }
     }
 

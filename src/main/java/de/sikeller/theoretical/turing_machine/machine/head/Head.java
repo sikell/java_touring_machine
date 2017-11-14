@@ -7,13 +7,13 @@ import de.sikeller.theoretical.turing_machine.tape.SymbolSquare;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Head implements IHead {
+public class Head<A> implements IHead<A> {
 
     private int pointer;
-    private final String blankSymbol;
-    private ITape tape;
+    private final A blankSymbol;
+    private ITape<A> tape;
 
-    public Head(String blankSymbol, ITape tape) {
+    public Head(A blankSymbol, ITape<A> tape) {
         this(0, blankSymbol, tape);
     }
 
@@ -28,8 +28,8 @@ public class Head implements IHead {
     }
 
     @Override
-    public String read() {
-        ISquare square = tape.read(pointer);
+    public A read() {
+        ISquare<A> square = tape.read(pointer);
         if (square.isBlank()) {
             return blankSymbol;
         }
@@ -37,13 +37,13 @@ public class Head implements IHead {
     }
 
     @Override
-    public void write(String symbol) {
-        ISquare square = blankSymbol.equals(symbol) ? new BlankSquare() : new SymbolSquare(symbol);
+    public void write(A symbol) {
+        ISquare<A> square = blankSymbol.equals(symbol) ? new BlankSquare() : new SymbolSquare<>(symbol);
         tape.write(pointer, square);
     }
 
     @Override
-    public void useTape(ITape tape) {
+    public void useTape(ITape<A> tape) {
         this.tape = tape;
     }
 

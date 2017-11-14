@@ -2,16 +2,16 @@ package de.sikeller.theoretical.turing_machine.machine.head;
 
 import de.sikeller.theoretical.turing_machine.tape.ITape;
 
-public interface IHead {
+public interface IHead<A> {
 
     void moveRight();
 
     void moveLeft();
 
-    String read();
+    A read();
 
-    void write(String symbol);
+    void write(A symbol);
 
-    void useTape(ITape tape);
+    void useTape(ITape<A> tape);
 
 }

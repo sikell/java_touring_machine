@@ -11,18 +11,18 @@ import de.sikeller.theoretical.turing_machine.tape.ITape;
 
 import java.util.Set;
 
-public class TuringMachine implements ITuringMachine {
+public class TuringMachine<A> implements ITuringMachine<A> {
 
-    private final String blankSymbol;
-    private final ITransitionFunction transitionFunction;
+    private final A blankSymbol;
+    private final ITransitionFunction<A> transitionFunction;
 
     private final IStateRegister stateRegister;
 
     public TuringMachine(Set<IState> states,
-                         Set<String> alphabetSymbols,
-                         Set<String> inputSymbols,
-                         String blankSymbol,
-                         ITransitionFunction transitionFunction,
+                         Set<A> alphabetSymbols,
+                         Set<A> inputSymbols,
+                         A blankSymbol,
+                         ITransitionFunction<A> transitionFunction,
                          IState initialState,
                          Set<IState> finalStates) {
         this.blankSymbol = blankSymbol;
@@ -32,16 +32,16 @@ public class TuringMachine implements ITuringMachine {
     }
 
     @Override
-    public boolean solve(ITape tape) {
-        IHead head = new Head(blankSymbol, tape);
+    public boolean solve(ITape<A> tape) {
+        IHead<A> head = new Head<>(blankSymbol, tape);
         int iteration = 0;
         while (!stateRegister.isFinal() && iteration < 10000) {
             System.out.println("Iteration i = " + iteration);
             System.out.println("Tape: " + tape.toSymbolString());
             IState actualState = stateRegister.getActualState();
-            String actualSymbol = head.read();
+            A actualSymbol = head.read();
             System.out.println("Actual: (" + actualState.toString() + "," + actualSymbol + ")");
-            ITransition transition = transitionFunction.getTransition(actualState, actualSymbol);
+            ITransition<A> transition = transitionFunction.getTransition(actualState, actualSymbol);
             if (transition == null) {
                 System.out.println("No transition found!");
                 return false;

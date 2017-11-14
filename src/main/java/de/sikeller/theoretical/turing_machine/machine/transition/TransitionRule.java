@@ -7,18 +7,22 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class TransitionRule implements ITransitionRule {
+public class TransitionRule<A> implements ITransitionRule<A> {
 
     private final IState inputState;
-    private final String inputSymbol;
+    private final A inputSymbol;
 
     private final IState nextState;
-    private final String write;
+    private final A write;
     private final HeadMotion headMotion;
 
     @Override
     public String toString() {
         return String.format("(%s,%s,%s,%s,%s)",
-                inputState.toString(), inputSymbol, nextState.toString(), write, headMotion.toString());
+                inputState.toString(),
+                inputSymbol.toString(),
+                nextState.toString(),
+                write.toString(),
+                headMotion.toString());
     }
 }

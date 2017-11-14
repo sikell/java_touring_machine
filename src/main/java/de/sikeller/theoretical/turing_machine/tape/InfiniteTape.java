@@ -19,15 +19,15 @@ public class InfiniteTape<A> implements ITape<A> {
     }
 
     @Override
-    public A read(Integer index) {
+    public ISquare<A> read(Integer index) {
         if (index < 0 || index >= array.size()) {
-            return new BlankSquare<A>().getSymbol();
+            return new BlankSquare<>();
         }
-        return array.get(index).getSymbol();
+        return array.get(index);
     }
 
     @Override
-    public void write(Integer index, A symbol) {
+    public void write(Integer index, ISquare<A> symbol) {
         if (index < 0) {
             throw new IllegalArgumentException("Write on blanks, which has an index smaller 0 and are not initialized " +
                     "on startup is actually not possible.");
@@ -38,9 +38,9 @@ public class InfiniteTape<A> implements ITape<A> {
             for (int i = 0; i < diff; i++) {
                 array.add(new BlankSquare<>());
             }
-            array.add(new SymbolSquare<>(symbol));
+            array.add(symbol);
         } else {
-            array.set(index, new SymbolSquare<>(symbol));
+            array.set(index, symbol);
         }
     }
 
