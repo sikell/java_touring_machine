@@ -36,7 +36,7 @@ public class TuringMachine<A> implements ITuringMachine<A> {
     public boolean solve(ITape<A> tape) {
         IHead<A> head = new Head<>(blankSymbol, tape);
         int iteration = 0;
-        while (!stateRegister.isFinal() && iteration < MAX_ITERATIONS) {
+        while (!stateRegister.isFinal() && iteration <= MAX_ITERATIONS) {
             System.out.println("Iteration i = " + iteration);
             System.out.println("Tape: " + tape.toSymbolString());
             IState actualState = stateRegister.getActualState();
@@ -53,8 +53,12 @@ public class TuringMachine<A> implements ITuringMachine<A> {
             stateRegister.setActualState(transition.getNextState());
             iteration++;
         }
+        if (iteration >= MAX_ITERATIONS) {
+            System.err.println("Max iterations reached!");
+            return false;
+        }
         System.out.println("Input string accepted!");
-        return iteration < MAX_ITERATIONS;
+        return true;
     }
 
 }
