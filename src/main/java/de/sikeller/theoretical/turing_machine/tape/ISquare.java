@@ -1,10 +1,10 @@
 package de.sikeller.theoretical.turing_machine.tape;
 
-public interface ISquare {
+public interface ISquare<A> {
 
     boolean isBlank();
 
-    String getSymbol();
+    A getSymbol();
 
     String toSymbolString();
 

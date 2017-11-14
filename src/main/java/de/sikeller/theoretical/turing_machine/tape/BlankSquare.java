@@ -3,7 +3,7 @@ package de.sikeller.theoretical.turing_machine.tape;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class BlankSquare implements ISquare {
+public class BlankSquare<A> implements ISquare<A> {
 
     @Override
     public boolean isBlank() {
@@ -11,7 +11,7 @@ public class BlankSquare implements ISquare {
     }
 
     @Override
-    public String getSymbol() {
+    public A getSymbol() {
         return null;
     }
 

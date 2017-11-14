@@ -9,7 +9,7 @@ import de.sikeller.theoretical.turing_machine.machine.transition.ITransitionFunc
 import de.sikeller.theoretical.turing_machine.machine.transition.ITransitionRule;
 import de.sikeller.theoretical.turing_machine.machine.transition.TransitionFunction;
 import de.sikeller.theoretical.turing_machine.machine.transition.TransitionRule;
-import de.sikeller.theoretical.turing_machine.tape.InfiniteTape;
+import de.sikeller.theoretical.turing_machine.tape.StringInfiniteTape;
 import de.sikeller.theoretical.turing_machine.utils.CollectionUtils;
 
 import java.util.Set;
@@ -86,7 +86,7 @@ public class MainExample {
                 initialState,
                 finalStates);
 
-        boolean result = turingMachine.solve(new InfiniteTape("000111222"));
+        boolean result = turingMachine.solve(new StringInfiniteTape("000111222"));
         System.out.print("Result (000111222): " + result);
     }
 

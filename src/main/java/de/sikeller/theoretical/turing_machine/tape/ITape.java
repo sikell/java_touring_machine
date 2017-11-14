@@ -1,10 +1,10 @@
 package de.sikeller.theoretical.turing_machine.tape;
 
-public interface ITape {
+public interface ITape<A> {
 
-    ISquare read(Integer index);
+    A read(Integer index);
 
-    void write(Integer index, ISquare symbol);
+    void write(Integer index, A symbol);
 
     String toSymbolString();
 

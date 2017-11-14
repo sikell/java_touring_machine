@@ -5,25 +5,25 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(of = "symbol")
-public class SymbolSquare implements ISquare {
+public class SymbolSquare<A> implements ISquare<A> {
 
-    private final String symbol;
+    private final A symbol;
 
-    public SymbolSquare(String symbol) {
-        if (symbol == null || symbol.isEmpty()) {
-            throw new IllegalArgumentException("Symbol square must contain a non empty string symbol.");
+    public SymbolSquare(A symbol) {
+        if (symbol == null) {
+            throw new IllegalArgumentException("Symbol square must have a non null symbol object.");
         }
         this.symbol = symbol;
     }
 
     @Override
     public boolean isBlank() {
-        return this.symbol == null;
+        return false;
     }
 
     @Override
     public String toSymbolString() {
-        return symbol;
+        return symbol.toString();
     }
 
 }
