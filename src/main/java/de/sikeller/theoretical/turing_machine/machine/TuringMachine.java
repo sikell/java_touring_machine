@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class TuringMachine<A> implements ITuringMachine<A> {
 
+    private static final int MAX_ITERATIONS = 10000;
     private final A blankSymbol;
     private final ITransitionFunction<A> transitionFunction;
 
@@ -35,7 +36,7 @@ public class TuringMachine<A> implements ITuringMachine<A> {
     public boolean solve(ITape<A> tape) {
         IHead<A> head = new Head<>(blankSymbol, tape);
         int iteration = 0;
-        while (!stateRegister.isFinal() && iteration < 10000) {
+        while (!stateRegister.isFinal() && iteration < MAX_ITERATIONS) {
             System.out.println("Iteration i = " + iteration);
             System.out.println("Tape: " + tape.toSymbolString());
             IState actualState = stateRegister.getActualState();
@@ -53,7 +54,7 @@ public class TuringMachine<A> implements ITuringMachine<A> {
             iteration++;
         }
         System.out.println("Input string accepted!");
-        return true;
+        return iteration < MAX_ITERATIONS;
     }
 
 }
