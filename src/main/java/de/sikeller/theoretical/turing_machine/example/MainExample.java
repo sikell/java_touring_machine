@@ -5,10 +5,10 @@ import de.sikeller.theoretical.turing_machine.machine.TuringMachine;
 import de.sikeller.theoretical.turing_machine.machine.head.HeadMotion;
 import de.sikeller.theoretical.turing_machine.machine.state.IState;
 import de.sikeller.theoretical.turing_machine.machine.state.State;
-import de.sikeller.theoretical.turing_machine.machine.transition.ITransitionFunction;
-import de.sikeller.theoretical.turing_machine.machine.transition.ITransitionRule;
-import de.sikeller.theoretical.turing_machine.machine.transition.TransitionFunction;
-import de.sikeller.theoretical.turing_machine.machine.transition.TransitionRule;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.ITransitionFunction;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.ITransitionRule;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.TransitionFunction;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.TransitionRule;
 import de.sikeller.theoretical.turing_machine.tape.StringInfiniteTape;
 import de.sikeller.theoretical.turing_machine.utils.CollectionUtils;
 

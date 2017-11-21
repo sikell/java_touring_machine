@@ -5,8 +5,8 @@ import de.sikeller.theoretical.turing_machine.machine.head.IHead;
 import de.sikeller.theoretical.turing_machine.machine.state.IState;
 import de.sikeller.theoretical.turing_machine.machine.state.IStateRegister;
 import de.sikeller.theoretical.turing_machine.machine.state.StateRegister;
-import de.sikeller.theoretical.turing_machine.machine.transition.ITransition;
-import de.sikeller.theoretical.turing_machine.machine.transition.ITransitionFunction;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.ITransition;
+import de.sikeller.theoretical.turing_machine.machine.transition.single.ITransitionFunction;
 import de.sikeller.theoretical.turing_machine.tape.ITape;
 
 import java.util.Set;
